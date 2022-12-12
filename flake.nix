@@ -18,8 +18,9 @@
       packages = forAllSystems (system:
         let
           pkgs = nixpkgsFor.${system}.pkgsStatic;
-        in {
-          default = pkgs.rustPlatform.buildRustPackage rec {
+        in
+        {
+          default = pkgs.rustPlatform.buildRustPackage {
             pname = "pngme";
             version = "0.1.0";
 
