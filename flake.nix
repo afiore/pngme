@@ -8,6 +8,7 @@
       # Should work with other targets, but not tested.
       supportedSystems = [ "x86_64-linux" ];
 
+
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
@@ -37,7 +38,10 @@
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
               cargo
+              rustc
+              rust.packages.stable.rustPlatform.rustLibSrc
             ];
+            RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
           };
         });
     };
